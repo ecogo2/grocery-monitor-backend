@@ -2,7 +2,6 @@ package ba.ecogo.grocerymonitor.model;
 
 import ba.ecogo.grocerymonitor.model.base.BaseModel;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

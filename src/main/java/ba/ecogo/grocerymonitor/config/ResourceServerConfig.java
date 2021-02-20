@@ -33,7 +33,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/static/**", "/swagger-ui.html*", "/swagger-resources/**", "/configuration/**", "/v2/**" , "/health", "/webjars/**").permitAll()
-                .antMatchers( "/api/v1/registrations/**").permitAll()
+                .antMatchers( "/registrations/**").permitAll()
                 .antMatchers("/oauth/**").permitAll()
                 .antMatchers("/**")
                 .fullyAuthenticated();
@@ -41,7 +41,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     }
 
     @Override
-    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+    public void configure(ResourceServerSecurityConfigurer resources) {
         resources.resourceId("gmservice").tokenStore(tokenStore);
     }
 

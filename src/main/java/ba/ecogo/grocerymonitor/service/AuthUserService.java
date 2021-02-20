@@ -2,6 +2,7 @@ package ba.ecogo.grocerymonitor.service;
 
 import ba.ecogo.grocerymonitor.model.AuthUser;
 import ba.ecogo.grocerymonitor.repository.AuthUserRepository;
+import ba.ecogo.grocerymonitor.service.base.BaseService;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

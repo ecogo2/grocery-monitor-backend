@@ -1,5 +1,6 @@
 package ba.ecogo.grocerymonitor.api;
 
+import ba.ecogo.grocerymonitor.api.base.BaseResource;
 import ba.ecogo.grocerymonitor.model.AuthUser;
 import ba.ecogo.grocerymonitor.model.Privilege;
 import ba.ecogo.grocerymonitor.repository.AuthUserRepository;
@@ -14,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/gm/api/v1/users")
-public class AuthUserResource extends BaseResource<AuthUser, AuthUserRepository, AuthUserService>{
+@RequestMapping(path = "/users")
+public class AuthUserResource extends BaseResource<AuthUser, AuthUserRepository, AuthUserService> {
 
     @GetMapping
     @ResponseBody
@@ -26,6 +27,7 @@ public class AuthUserResource extends BaseResource<AuthUser, AuthUserRepository,
 
     @GetMapping("/{username}")
     @ResponseBody
+    @PreAuthorize("hasAuthority('USER')")
     public AuthUser getUserByName(@PathVariable("username") String username) {
         return (AuthUser) service.loadUserByUsername(username);
     }

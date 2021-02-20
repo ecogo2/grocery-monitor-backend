@@ -1,6 +1,7 @@
 package ba.ecogo.grocerymonitor.service;
 
 
+import ba.ecogo.grocerymonitor.model.base.BaseException;
 import ba.ecogo.grocerymonitor.model.base.JWT;
 import ba.ecogo.grocerymonitor.service.abst.SecurityAbstractService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -35,7 +36,7 @@ public class SecurityService extends SecurityAbstractService {
         super(LoggerFactory.getLogger(SecurityService.class));
     }
 
-    public JWT getToken() throws Exception {
+    public JWT getToken() {
         String tokenValue = null;
         final Authentication authenticationObject = SecurityContextHolder.getContext().getAuthentication();
         if (authenticationObject != null) {
@@ -52,7 +53,7 @@ public class SecurityService extends SecurityAbstractService {
                     JWT.class);
 
         } catch (Exception e) {
-            throw new Exception(e.getLocalizedMessage());
+            throw new BaseException(e.getLocalizedMessage());
         }
     }
 
