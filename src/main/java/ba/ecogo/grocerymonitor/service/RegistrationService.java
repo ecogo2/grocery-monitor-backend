@@ -1,6 +1,7 @@
 package ba.ecogo.grocerymonitor.service;
 
 import ba.ecogo.grocerymonitor.model.AuthUser;
+import ba.ecogo.grocerymonitor.model.EmailMessage;
 import ba.ecogo.grocerymonitor.model.Registration;
 import ba.ecogo.grocerymonitor.model.base.BaseException;
 import ba.ecogo.grocerymonitor.repository.RegistrationRepository;
@@ -16,11 +17,17 @@ public class RegistrationService extends BaseService<Registration, RegistrationR
 
     @Autowired AuthUserService userService;
     @Autowired PrivilegeService privilegeService;
+    @Autowired EmailService emailService;
 
     @Override
     public Registration createModel(Registration input) {
         logger.info("Saving {} without user id", Registration.class.getSimpleName());
-        return repository.saveAndFlush(input);
+        return ServiceFunctions.createAndSendEmail(
+                input,
+                repository::saveAndFlush,
+                this::constructEmail,
+                emailService::sendEmail
+        );
     }
 
     @Override
@@ -35,8 +42,14 @@ public class RegistrationService extends BaseService<Registration, RegistrationR
                 this::getModel,
                 privilegeService::getModel,
                 AuthUser::new,
-                userService::createModel
+                userService::createModel,
+                this::constructEmail,
+                emailService::sendEmail
         );
+    }
+
+    private EmailMessage constructEmail(String email, String subject, String body) {
+        return new EmailMessage(email, subject, body);
     }
 
 }
