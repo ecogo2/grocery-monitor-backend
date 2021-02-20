@@ -1,8 +1,13 @@
 package ba.ecogo.grocerymonitor.model;
 
+import ba.ecogo.grocerymonitor.model.base.BaseModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,8 +18,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Data
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
+@Accessors(chain = true)
+@NoArgsConstructor
+@ToString(callSuper = true)
 @Entity
 @Table(name = "product")
 public class Product extends BaseModel {
