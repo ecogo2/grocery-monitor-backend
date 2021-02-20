@@ -50,4 +50,12 @@ public class AuthUser extends BaseModel {
         this.email = authUser.getEmail();
         this.privilege = authUser.getPrivilege();
     }
+
+    public AuthUser(Registration registration, Privilege privilege) {
+        super();
+        this.username = registration.getName();
+        this.password = registration.getPassword();
+        this.email = registration.getEmail();
+        this.privilege = privilege;
+    }
 }

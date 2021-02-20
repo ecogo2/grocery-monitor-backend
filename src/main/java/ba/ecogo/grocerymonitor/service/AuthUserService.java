@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Set;
+import java.util.UUID;
 
 @Service
 public class AuthUserService extends BaseService<AuthUser, AuthUserRepository> implements UserDetailsService {
@@ -52,4 +53,5 @@ public class AuthUserService extends BaseService<AuthUser, AuthUserRepository> i
             return true;
         }
     }
+
 }

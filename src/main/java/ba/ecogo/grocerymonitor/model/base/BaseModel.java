@@ -23,11 +23,11 @@ import java.util.UUID;
 @MappedSuperclass
 public class BaseModel {
     @Id
-    private UUID id;
+    protected UUID id;
     @Version
-    private Integer version;
-    private LocalDateTime dateCreated;
-    private UUID userId;
+    protected Integer version;
+    protected LocalDateTime dateCreated;
+    protected UUID userId;
 
     @PrePersist
     private void populateFields() {

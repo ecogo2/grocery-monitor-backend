@@ -17,13 +17,13 @@ public abstract class BaseService<T extends BaseModel, R extends BaseModelReposi
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public T createModel(T input) {
-        logger.info("Saving {}, user id: {}", input.getClass().getSimpleName(), securityService.getToken().getUserId());
-        input.setUserId(securityService.getToken().getUserId());
+        logger.info("Saving {}, user id: {}", input.getClass().getSimpleName(), "securityService.getToken().getUserId()");
+//        input.setUserId(securityService.getToken().getUserId());
         return repository.saveAndFlush(input);
     }
 
     public T getModel(UUID input) {
-        logger.info("Getting {}, user id: {}", input.getClass().getSimpleName(), securityService.getToken().getUserId());
+        logger.info("Getting {}, user id: {}", input.getClass().getSimpleName(), "securityService.getToken().getUserId()");
         return repository.findByIdAndUserId(input, securityService.getToken().getUserId());
     }
 }
