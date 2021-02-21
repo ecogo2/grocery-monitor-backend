@@ -1,6 +1,7 @@
 package ba.ecogo.grocerymonitor.model;
 
 import ba.ecogo.grocerymonitor.model.base.BaseModel;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -31,6 +32,7 @@ public class ProductCategory extends BaseModel {
     @Column(name = "name", length = 100)
     private String name;
 
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinColumn(name = "product_category", referencedColumnName = "id", nullable = true, insertable = true, updatable = true)
     private Set<Product> items = new HashSet<>();

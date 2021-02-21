@@ -20,11 +20,19 @@ public class AuthUserService extends BaseService<AuthUser, AuthUserRepository> i
         return user != null ? new UserRepositoryUserDetails(user) : null;
     }
 
+    @Override
+    public AuthUser createModel(AuthUser input) {
+        logger.info("Saving {}", input.getClass().getSimpleName());
+        return repository.saveAndFlush(input);
+    }
+
     private static final class UserRepositoryUserDetails extends AuthUser implements UserDetails {
         private static final long serialVersionUID = -487688845028610536L;
 
         private UserRepositoryUserDetails(AuthUser user) {
             super(user);
+            this.userId = user.getUserId();
+            this.id = user.getId();
         }
 
 

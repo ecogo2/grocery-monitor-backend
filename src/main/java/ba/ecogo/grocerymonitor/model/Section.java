@@ -1,6 +1,8 @@
 package ba.ecogo.grocerymonitor.model;
 
 import ba.ecogo.grocerymonitor.model.base.BaseModel;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,6 +16,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,8 +26,8 @@ import java.util.Set;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @Entity
-@Table(name="group")
-public class Group extends BaseModel {
+@Table(name="section", uniqueConstraints = {@UniqueConstraint(name = "uc_section_name_user_id", columnNames = {"name", "userId"})})
+public class Section extends BaseModel {
 
     @Column(name = "name")
     private String name;
@@ -32,7 +35,8 @@ public class Group extends BaseModel {
     @Column(name = "priority")
     private Integer priority;
 
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    @JoinColumn(name = "group_items", referencedColumnName = "id", nullable = true, insertable = true, updatable = true)
-    private Set<GroupItem> items = new HashSet<>();
+    @JoinColumn(name = "section_items", referencedColumnName = "id", nullable = true, insertable = true, updatable = true)
+    private Set<SectionItem> items = new HashSet<>();
 }

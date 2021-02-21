@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 import java.util.UUID;
@@ -21,7 +22,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @Entity
-@Table(name = "registration")
+@Table(name = "registration", uniqueConstraints = {@UniqueConstraint(name = "uc_registration_name", columnNames = {"name"}),
+                                                   @UniqueConstraint(name = "uc_registration_email", columnNames = {"email"})})
 public class Registration extends BaseModel {
 
     @Column(name = "name", nullable = false, length = 60)

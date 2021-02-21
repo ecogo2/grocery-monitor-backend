@@ -12,18 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 
 @RestController
 @RequestMapping(path = "/users")
 public class AuthUserResource extends BaseResource<AuthUser, AuthUserRepository, AuthUserService> {
-
-    @GetMapping
-    @ResponseBody
-    @PreAuthorize("hasAuthority('USER')")
-    public List<AuthUser> getUsers() {
-        return List.of(new AuthUser("test", "testpass", "test@email.com", new Privilege().setDescription("user role").setValue("USER"))) ;
-    }
 
     @GetMapping("/{username}")
     @ResponseBody

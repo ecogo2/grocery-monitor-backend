@@ -15,6 +15,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 
 
@@ -26,7 +27,8 @@ import javax.validation.constraints.Email;
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @Entity
-@Table(name = "app_user")
+@Table(name = "app_user", uniqueConstraints = {@UniqueConstraint(name = "uc_user_name", columnNames = {"username"}),
+                                               @UniqueConstraint(name = "uc_user_email", columnNames = {"email"})})
 public class AuthUser extends BaseModel {
 
     @Column(name = "username", length = 50)

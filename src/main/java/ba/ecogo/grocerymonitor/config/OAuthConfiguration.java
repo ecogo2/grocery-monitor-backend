@@ -152,7 +152,7 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
             final AuthUser user = (AuthUser) userService.loadUserByUsername(authentication.getName());
 
             additionalInfo.put("userId", user.getId());
-            additionalInfo.put("userPrivilege", user.getPrivilege());
+//            additionalInfo.put("userPrivilege", user.getPrivilege());
 
             ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
 

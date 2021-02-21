@@ -1,6 +1,8 @@
 package ba.ecogo.grocerymonitor.model;
 
 import ba.ecogo.grocerymonitor.model.base.BaseModel;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,14 +26,15 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @Entity
-@Table(name="group_item")
-public class GroupItem extends BaseModel {
+@Table(name="section_item")
+public class SectionItem extends BaseModel {
 
     @ToString.Exclude
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "product_category", referencedColumnName = "id", nullable = false, insertable = false, updatable = false,
-            foreignKey = @ForeignKey(name = "fk_group_item_group_id"))
-    private Group group;
+            foreignKey = @ForeignKey(name = "fk_section_item_section_id"))
+    private Section section;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product", referencedColumnName = "id")

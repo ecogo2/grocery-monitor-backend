@@ -1,6 +1,8 @@
 package ba.ecogo.grocerymonitor.model;
 
 import ba.ecogo.grocerymonitor.model.base.BaseModel;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -28,8 +30,9 @@ import javax.persistence.Table;
 public class Product extends BaseModel {
 
     @ToString.Exclude
+    @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "product_category", referencedColumnName = "id", nullable = false, insertable = false, updatable = false,
+    @JoinColumn(name = "product_category", referencedColumnName = "id", nullable = true, insertable = true, updatable = true,
             foreignKey = @ForeignKey(name = "fk_product_category_product_id"))
     private ProductCategory productCategory;
 

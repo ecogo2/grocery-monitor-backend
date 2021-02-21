@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
 import java.util.UUID;
 
 public abstract class BaseResource<T extends BaseModel, R extends BaseModelRepository<T>, S extends BaseService<T, R>> {
@@ -28,5 +29,11 @@ public abstract class BaseResource<T extends BaseModel, R extends BaseModelRepos
     @ResponseBody
     public T getModel(@PathVariable("id") UUID id) {
         return service.getModel(id);
+    }
+
+    @GetMapping()
+    @ResponseBody
+    public List<T> getModels() {
+        return service.getModels();
     }
 }
