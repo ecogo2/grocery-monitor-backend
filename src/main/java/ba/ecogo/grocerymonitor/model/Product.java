@@ -13,8 +13,6 @@ import lombok.experimental.Accessors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -38,12 +36,8 @@ public class Product extends BaseModel {
 
     @Column(name = "name", length = 100)
     private String name;
-    @Column(name = "amount")
-    private Double amount;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "measurement_unit")
-    private MeasurementUnit measurementUnit;
-
+    @Column(name = "calories_amount")
+    private Double caloriesAmount;
 
 }
 

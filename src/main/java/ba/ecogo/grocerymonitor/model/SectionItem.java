@@ -1,8 +1,8 @@
 package ba.ecogo.grocerymonitor.model;
 
 import ba.ecogo.grocerymonitor.model.base.BaseModel;
+import ba.ecogo.grocerymonitor.model.in.SectionItemIn;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,6 +19,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.criteria.Selection;
 
 @Getter
 @Setter
@@ -32,7 +33,7 @@ public class SectionItem extends BaseModel {
     @ToString.Exclude
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "product_category", referencedColumnName = "id", nullable = false, insertable = false, updatable = false,
+    @JoinColumn(name = "section_item", referencedColumnName = "id", nullable = false, insertable = true, updatable = true,
             foreignKey = @ForeignKey(name = "fk_section_item_section_id"))
     private Section section;
 
@@ -52,5 +53,15 @@ public class SectionItem extends BaseModel {
 
     @Column(name = "percentage")
     private Double percentage;
+
+    public SectionItem(SectionItemIn input, Section section, Product product) {
+        super();
+        this.section = section;
+        this.product = product;
+        this.refQuantity = input.getRefQuantity();
+        this.currentQuantity = input.getCurrentQuantity();
+        this.measurementUnit = input.getMeasurementUnit();
+        this.percentage = input.getPercentage();
+    }
 
 }

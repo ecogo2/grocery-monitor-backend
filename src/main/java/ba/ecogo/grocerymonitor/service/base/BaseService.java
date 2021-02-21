@@ -1,7 +1,6 @@
 package ba.ecogo.grocerymonitor.service.base;
 
 import ba.ecogo.grocerymonitor.model.base.BaseModel;
-import ba.ecogo.grocerymonitor.model.base.JWT;
 import ba.ecogo.grocerymonitor.repository.BaseModelRepository;
 import ba.ecogo.grocerymonitor.service.SecurityService;
 import org.slf4j.Logger;
@@ -32,5 +31,10 @@ public abstract class BaseService<T extends BaseModel, R extends BaseModelReposi
     public List<T> getModels() {
         logger.info("Getting Objects, user id: {}", securityService.getToken().getUserId());
         return repository.findByUserId(securityService.getToken().getUserId());
+    }
+
+    public void deleteModel(UUID id) {
+        logger.info("Deleting Object, user id: {}", securityService.getToken().getUserId());
+        repository.delete(repository.findByIdAndUserId(id, securityService.getToken().getUserId()));
     }
 }

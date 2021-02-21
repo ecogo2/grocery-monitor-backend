@@ -5,6 +5,7 @@ import ba.ecogo.grocerymonitor.model.base.BaseModel;
 import ba.ecogo.grocerymonitor.repository.BaseModelRepository;
 import ba.ecogo.grocerymonitor.service.base.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,5 +36,10 @@ public abstract class BaseResource<T extends BaseModel, R extends BaseModelRepos
     @ResponseBody
     public List<T> getModels() {
         return service.getModels();
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteModel(@PathVariable("id") UUID id) {
+        service.deleteModel(id);
     }
 }
